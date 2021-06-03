@@ -70,7 +70,7 @@ export class Login extends Component {
                                     </Col>
                                 </FormGroup>
                                 <Row>
-                                    <Col sm={{size: 5, offset: 10}}>
+                                    <Col sm={{size: 5, offset: 9}}>
                                         <Button color="primary" onClick={this.handleSubmit}>Sign In</Button>
                                     </Col>
                                 </Row>
