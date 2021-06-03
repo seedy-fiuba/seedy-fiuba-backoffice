@@ -6,6 +6,6 @@ export class SuccessfulApiResponse extends Response {
     }
 
     static understandThis(jsonResponse) {
-        return jsonResponse.error === undefined;
+        return (jsonResponse.status <= 300 && jsonResponse.status >= 200);
     }
 }

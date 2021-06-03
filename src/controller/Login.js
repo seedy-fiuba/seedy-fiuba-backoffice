@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Button, FormGroup, Label, Input, Col, Row} from 'reactstrap';
+import {Form, Button, FormGroup, Label, Input, Col, Row, Alert} from 'reactstrap';
 import "../assets/css/Login.css";
 import logo from "../assets/img/logo-seedyfiuba.png";
 import '../assets/css/App.css';
@@ -69,9 +69,22 @@ export class Login extends Component {
                                         <Input type="password" name="password" id="password" placeholder="Password" onChange={this.handleInputChange}/>
                                     </Col>
                                 </FormGroup>
-                                <Col sm={{size: 5, offset: 10}}>
-                                    <Button color="primary" onClick={this.handleSubmit}>Sign In</Button>
-                                </Col>
+                                <Row>
+                                    <Col sm={{size: 5, offset: 10}}>
+                                        <Button color="primary" onClick={this.handleSubmit}>Sign In</Button>
+                                    </Col>
+                                </Row>
+                                <br/>
+                                <Row>
+                                {
+                                    this.state.errorMessage &&
+                                        <Col sm={12}>
+                                            <Alert color="danger">
+                                                {this.state.errorMessage}
+                                            </Alert>
+                                        </Col>
+                                }
+                                </Row>
                             </Form>
                         </Col>
                     </Row>

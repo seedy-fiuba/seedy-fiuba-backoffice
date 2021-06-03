@@ -12,7 +12,7 @@ export class Response {
     }
 
     errors() {
-        return this._jsonResponse.error;
+        return this._jsonResponse.message;
     }
 
     content() {

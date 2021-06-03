@@ -17,7 +17,7 @@ export class ServerErrorResponse extends HTTPResponse {
     }
 
     static understandThis(response) {
-        return response.status >= 500;
+        return response.status >= 400;
     }
 
     hasError() {
