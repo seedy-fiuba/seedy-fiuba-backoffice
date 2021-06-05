@@ -17,6 +17,10 @@ export class ErrorApiResponse extends Response {
         return this.errors();
     }
 
+    hasError() {
+        return true;
+    }
+
     description() {
         return "¡Ha ocurrido un error!"
     }

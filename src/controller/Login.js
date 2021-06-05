@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Form, Button, FormGroup, Label, Input, Col, Row} from 'reactstrap';
+import {Form, Button, FormGroup, Label, Input, Col, Row, Alert, FormFeedback} from 'reactstrap';
 import "../assets/css/Login.css";
 import logo from "../assets/img/logo-seedyfiuba.png";
 import '../assets/css/App.css';
@@ -60,18 +60,32 @@ export class Login extends Component {
                                 <FormGroup row>
                                     <Label for="email" sm={2}>Email</Label>
                                     <Col sm={10}>
-                                        <Input type="email" name="email" id="email" placeholder="Email" onChange={this.handleInputChange}/>
+                                        <Input type="email" name="email" id="email" placeholder="Email" required onChange={this.handleInputChange}/>
+                                        <FormFeedback valid> sarasa  </FormFeedback>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="password" sm={2}>Password</Label>
                                     <Col sm={10}>
-                                        <Input type="password" name="password" id="password" placeholder="Password" onChange={this.handleInputChange}/>
+                                        <Input type="password" name="password" id="password" placeholder="Password" required onChange={this.handleInputChange}/>
                                     </Col>
                                 </FormGroup>
-                                <Col sm={{size: 5, offset: 10}}>
-                                    <Button color="primary" onClick={this.handleSubmit}>Sign In</Button>
-                                </Col>
+                                <Row>
+                                    <Col sm={{size: 5, offset: 9}}>
+                                        <Button color="primary" onClick={this.handleSubmit}>Sign In</Button>
+                                    </Col>
+                                </Row>
+                                <br/>
+                                <Row>
+                                {
+                                    this.state.errorMessage &&
+                                        <Col sm={12}>
+                                            <Alert color="danger">
+                                                {this.state.errorMessage}
+                                            </Alert>
+                                        </Col>
+                                }
+                                </Row>
                             </Form>
                         </Col>
                     </Row>

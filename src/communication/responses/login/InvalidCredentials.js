@@ -7,7 +7,7 @@ export class InvalidCredentials extends ErrorApiResponse {
         }
     }
 
-    static errorCodes() {
-        return ["user not found", "Missing email or username", "Missing password"]
+    static understandThis(jsonResponse) {
+        return jsonResponse.status === 401;
     }
 }
