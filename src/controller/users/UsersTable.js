@@ -5,46 +5,38 @@ class UsersTable extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            users: this.props.users
-        }
-    }
-
-    componentDidMount() {
-        console.log("Users: " + JSON.stringify(this.state.users));
     }
 
     render() {
+        if (this.props.users.length === 0)
+            return <div className="spinner-grow text-success" role="status">
+                    </div>
         return (
             <Table hover>
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
+
+                {
+                    this.props.users.map((user) => {
+                        return <tr>
+                            <th scope="row">{user.id}</th>
+                            <td>{user.name}</td>
+                            <td>{user.lastName}</td>
+                            <td>{user.role}</td>
+                            <td>{user.createdAt}</td>
+                            <td>{user.updatedAt}</td>
+                        </tr>
+                    })
+                }
                 </tbody>
             </Table>
         );
