@@ -10,6 +10,7 @@ export class Login extends Component {
         super(props);
 
         this.state = {
+            isLoading: false,
             formData: {
                 email: '',
                 password: ''
@@ -30,6 +31,7 @@ export class Login extends Component {
     }
 
     handleApiResponse(response) {
+        this.setState({isLoading: false});
         if (response.hasError()) {
             this.setState({errorMessage: response.errorMessages()});
         } else {
@@ -39,6 +41,7 @@ export class Login extends Component {
     }
 
     handleSubmit() {
+        this.setState({isLoading: true});
         app.usersApiClient().login(this.state.formData, this.handleApiResponse);
     }
 
@@ -72,7 +75,12 @@ export class Login extends Component {
                                 </FormGroup>
                                 <Row>
                                     <Col sm={{size: 5, offset: 9}}>
-                                        <Button color="primary" onClick={this.handleSubmit}>Sign In</Button>
+                                        <Button color="primary" onClick={this.handleSubmit} disabled={this.state.isLoading}>
+                                            {this.state.isLoading ?
+                                                <span className="spinner-grow spinner-grow-sm" role="status"
+                                                       aria-hidden="true"/>
+                                                : 'Sign In'}
+                                        </Button>
                                     </Col>
                                 </Row>
                                 <br/>

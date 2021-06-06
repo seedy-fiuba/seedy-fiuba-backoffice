@@ -9,8 +9,8 @@ export class ErrorApiResponse extends Response {
         throw new Error("You have to implement the method");
     }
 
-    static understandThis(jsonResponse) {
-        return jsonResponse.error !== undefined && this.errorCodes().includes(jsonResponse.error);
+    static understandThis(response) {
+        return response.error !== undefined && this.errorCodes().includes(response.error);
     }
 
     errorMessages() {

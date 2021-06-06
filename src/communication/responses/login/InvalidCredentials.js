@@ -7,7 +7,7 @@ export class InvalidCredentials extends ErrorApiResponse {
         }
     }
 
-    static understandThis(jsonResponse) {
-        return jsonResponse.status === 401;
+    static understandThis(response) {
+        return response.status === 401;
     }
 }

@@ -1,5 +1,6 @@
 import {ServerErrorResponse} from "../responses/generalResponses/ServerErrorResponse.js";
 import {LoginEndpoint} from "../endpoints/LoginEndpoint";
+import {ListUsersEndpoint} from "../endpoints/ListUsersEndpoint";
 
 
 class ApiClient {
@@ -25,6 +26,14 @@ class ApiClient {
             onResponse: (response) => this._handleResponse(response, onResponse),
             data: data
         });
+    }
+
+    getUsers(data, onResponse) {
+        return this._requester.call({
+            endpoint: new ListUsersEndpoint(),
+            onResponse: (response) => this._handleResponse(response, onResponse),
+            data: data
+        })
     }
 }
 

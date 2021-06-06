@@ -5,7 +5,7 @@ export class SuccessfulApiResponse extends Response {
         throw new Error("You have to implement the method");
     }
 
-    static understandThis(jsonResponse) {
-        return (jsonResponse.status <= 300 && jsonResponse.status >= 200);
+    static understandThis(response) {
+        return (response.status <= 300 && response.status >= 200);
     }
 }
