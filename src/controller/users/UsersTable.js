@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Table, Col} from "reactstrap";
-import {Redirect} from "react-router-dom";
 import {Visibility} from "@material-ui/icons";
-import {app} from "../../app/app";
 
 class UsersTable extends Component {
 
