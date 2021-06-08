@@ -44,7 +44,9 @@ export class UsersList extends Component {
         return (
             <Row>
                 <Col xs={10}>
-                    <UsersTable users={this.state.users} />
+                    <UsersTable users={this.state.users}
+                                history={this.props.history}
+                    />
                 </Col>
             </Row>
         )

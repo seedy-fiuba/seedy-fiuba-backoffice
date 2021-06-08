@@ -1,4 +1,4 @@
-import {LoginEndpoint} from "../endpoints/LoginEndpoint";
+import {LoginEndpoint} from "../endpoints/users/LoginEndpoint";
 import {LoginSuccessful} from "../responses/login/LoginSuccessful";
 
 const fakeRequesterExpectedResponses = () => {
