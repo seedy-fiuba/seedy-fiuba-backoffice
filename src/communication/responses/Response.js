@@ -1,5 +1,5 @@
 export class Response {
-    static understandThis(jsonResponse) {
+    static understandThis(response) {
         throw new Error("You have to implement the method");
     }
 

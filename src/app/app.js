@@ -38,7 +38,8 @@ class App {
         return {
             login: '/',
             home: '/home',
-            profile: '/profile'
+            users: '/users',
+            projects: '/projects'
         }
     }
 

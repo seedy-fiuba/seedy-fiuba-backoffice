@@ -14,10 +14,12 @@ class RemoteRequester extends Requester {
             url += "?" + this._dataToQueryString(data);
         }
 
-        return fetch(this._baseUrl + url, request).then(result => result.json())
-            .then(jsonResponse => {
+        return fetch(this._baseUrl + url, request).then(result => {
+            return result.json().then((jsonResponse => {
+                jsonResponse.status = result.status;
                 return onResponse(this._buildResponse(jsonResponse, endpoint));
-            })
+            }));
+        })
             /***
              * https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#Checking_that_the_fetch_was_successful
              *
@@ -26,9 +28,9 @@ class RemoteRequester extends Requester {
              * a 404 does not constitute a network error, for example.
              *
              ***/
-            .catch(exception => {
-                console.log("Exception in API request: ", exception);
-            })
+        .catch(exception => {
+            console.log("Exception in API request: ", exception);
+        })
     }
 
     _buildRequest(endpoint, data) {
@@ -46,16 +48,18 @@ class RemoteRequester extends Requester {
         return requestOptions;
     }
 
-    _buildResponse(jsonResponse, endpoint) {
+    _buildResponse(response, endpoint) {
         let endpointResponse;
+        if (!response.status)
+            response.status = 200;
 
         const availableResponsesForEndpoint = endpoint.responses();
         for (let responseType of availableResponsesForEndpoint) {
-            if (responseType.understandThis(jsonResponse)) {
-                endpointResponse = new responseType(jsonResponse);
+            if (responseType.understandThis(response)) {
+                endpointResponse = new responseType(response);
                 break;
             } else {
-                endpointResponse = new ErrorApiResponse(jsonResponse);
+                endpointResponse = new ErrorApiResponse(response);
             }
         }
 
@@ -76,10 +80,11 @@ class RemoteRequester extends Requester {
         for (let i = 0; i < Object.keys(data).length; i += 1) {
             let key = Object.keys(data)[i];
             let value = Object.values(data)[i];
-            if (value) {
+            if (value !== undefined) {
                 keyValuePairs.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
             }
         }
+
         return keyValuePairs.join('&');
     }
 
