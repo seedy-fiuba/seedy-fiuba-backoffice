@@ -15,10 +15,12 @@ class Routes extends Component {
         return (
             <Router key="router">
                 <Row>
-                    <Col xs={2}>
-                        <Nav/>
-                    </Col>
-                    <Col xs={10}>
+                    { localStorage.getItem("token") &&
+                        <Col xs={2}>
+                            <Nav/>
+                        </Col>
+                    }
+                    <Col xs={localStorage.getItem("token") ? 10 : 12}>
                         <Switch>
                             <Route exact path={app.routes().login} render={props => localStorage.getItem("token") ?
                                 <Redirect to={{pathname: app.routes().home}}/> :
