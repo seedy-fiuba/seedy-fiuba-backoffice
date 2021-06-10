@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import {Table} from "reactstrap";
+import {Visibility} from "@material-ui/icons";
 
 class ProjectsTable extends Component {
 
     constructor(props) {
         super(props);
+        this.renderProject = this.renderProject.bind(this);
+    }
+
+    renderProject(project) {
+        console.log("On click project: " + project.id);
     }
 
     render() {
@@ -36,6 +42,7 @@ class ProjectsTable extends Component {
                             <td>{project.status}</td>
                             <td>{project.createdAt}</td>
                             <td>{project.updatedAt}</td>
+                            <td><Visibility onClick={() => this.renderProfile(project)} style={{cursor: "pointer"}} /></td>
                         </tr>
                     })
                 }

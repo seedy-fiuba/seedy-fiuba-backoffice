@@ -48,6 +48,7 @@ class App {
             login: '/',
             home: '/home',
             users: '/users',
+            project: '/project/:id',
             projects: '/projects'
         }
     }

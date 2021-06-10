@@ -6,8 +6,10 @@ import {PrivateRoute} from "./PrivateRoute";
 import {Home} from "../controller/Home";
 import {UsersList} from "../controller/users/List";
 import {ProjectsList} from "../controller/projects/List";
+import ProjectView from "../controller/projects/ProjectView";
 import Nav from "../components/Navbar/Navbar";
 import {Col, Row} from "reactstrap";
+
 
 class Routes extends Component {
 
@@ -28,6 +30,7 @@ class Routes extends Component {
                             }/>
                             <PrivateRoute exact path={app.routes().home} component={Home}/>
                             <PrivateRoute exact path={app.routes().users} component={UsersList}/>
+                            <PrivateRoute exact path={app.routes().project} component={ProjectView}/>
                             <PrivateRoute exact path={app.routes().projects} component={ProjectsList}/>
                         </Switch>
                     </Col>
