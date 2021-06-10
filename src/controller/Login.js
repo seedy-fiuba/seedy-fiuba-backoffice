@@ -36,7 +36,7 @@ export class Login extends Component {
             this.setState({errorMessage: response.errorMessages()});
         } else {
             app.loginUser(response.content().token);
-            this.props.history.push(app.routes().home);
+            this.props.history.push(app.routes().login);
         }
     }
 

@@ -1,22 +1,30 @@
 import React, { Component } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import {Col, Nav, NavItem, NavLink, Row} from 'reactstrap';
 
 class Navbar extends Component {
     render() {
         return (
-            <div>
-                <p>Seedy Fiuba</p>
-                <Nav vertical>
-                    <NavItem>
-                        <NavLink href="/">Home</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="/users">Users</NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink href="/projects">Projects</NavLink>
-                    </NavItem>
-                </Nav>
+            <div className="text-center">
+                <Row>
+                    <Col xs={12}>
+                        <p>Seedy Fiuba</p>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12}>
+                        <Nav vertical>
+                            <NavItem>
+                                <NavLink href="/">Home</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/users">Users</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/projects">Projects</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Col>
+                </Row>
             </div>
         )
     }
