@@ -7,6 +7,7 @@ class App {
 
     constructor() {
         this._usersApiClient = undefined;
+        this._projectsApiClient = undefined;
     }
 
     usersApiClient() {
@@ -15,6 +16,14 @@ class App {
         }
 
         return this._usersApiClient;
+    }
+
+    projectsApiClient() {
+        if (this._projectsApiClient === undefined) {
+            this._projectsApiClient = this._setUpApiClient("PROJECTS");
+        }
+
+        return this._projectsApiClient;
     }
 
     _setUpApiClient(api) {
