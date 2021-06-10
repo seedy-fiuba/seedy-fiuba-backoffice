@@ -10,7 +10,8 @@ class ProjectsTable extends Component {
     }
 
     renderProject(project) {
-        console.log("On click project: " + project.id);
+        console.log("On click project: " + project._id);
+        this.props.history.push('/project/' + project._id);
     }
 
     render() {
@@ -42,7 +43,7 @@ class ProjectsTable extends Component {
                             <td>{project.status}</td>
                             <td>{project.createdAt}</td>
                             <td>{project.updatedAt}</td>
-                            <td><Visibility onClick={() => this.renderProfile(project)} style={{cursor: "pointer"}} /></td>
+                            <td><Visibility onClick={() => this.renderProject(project)} style={{cursor: "pointer"}} /></td>
                         </tr>
                     })
                 }

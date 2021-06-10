@@ -3,7 +3,7 @@ import {Row, Col} from 'reactstrap';
 import {app} from "../../app/app";
 import UsersTable from "./UsersTable";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 100;
 
 export class UsersList extends Component {
     constructor(props) {

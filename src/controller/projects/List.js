@@ -43,7 +43,7 @@ export class ProjectsList extends Component {
         return (
             <Row>
                 <Col xs={10}>
-                    <ProjectsTable projects={this.state.projects} />
+                    <ProjectsTable projects={this.state.projects}  history={this.props.history}/>
                 </Col>
             </Row>
         )

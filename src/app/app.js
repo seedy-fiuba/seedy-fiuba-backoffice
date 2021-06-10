@@ -1,5 +1,6 @@
 import ApiClient from "../communication/client/ApiClient";
 import UsersApiClient from "../communication/client/UsersApiClient";
+import ProjectsApiClient from "../communication/client/ProjectsApiClient";
 import FakeRequester from "../communication/requester/FakeRequester";
 import RemoteRequester from "../communication/requester/RemoteRequester";
 import {getSetting} from "../settings";
@@ -21,7 +22,7 @@ class App {
 
     projectsApiClient() {
         if (this._projectsApiClient === undefined) {
-            this._projectsApiClient = this._setUpApiClient("PROJECTS");
+            this._projectsApiClient = this._setUpProjectsApiClient();
         }
 
         return this._projectsApiClient;
@@ -30,6 +31,11 @@ class App {
     _setUpApiClient(api) {
         const requester = this._setUpRequester(api);
         return new ApiClient(requester);
+    }
+
+    _setUpProjectsApiClient() {
+        const requester = this._setUpRequester("PROJECTS");
+        return new ProjectsApiClient(requester);
     }
 
     _setUpUsersApiClient() {
