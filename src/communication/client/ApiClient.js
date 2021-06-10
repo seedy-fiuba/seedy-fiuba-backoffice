@@ -1,8 +1,4 @@
 import {ServerErrorResponse} from "../responses/generalResponses/ServerErrorResponse.js";
-import {LoginEndpoint} from "../endpoints/LoginEndpoint";
-import {ListUsersEndpoint} from "../endpoints/ListUsersEndpoint";
-import {ListProjectsEndpoint} from "../endpoints/ListProjectsEndpoint";
-import {GetProjectEndpoint} from "../endpoints/GetProjectEndpoint";
 
 class ApiClient {
     constructor(requester, onServerErrorDo = () => {
@@ -19,40 +15,6 @@ class ApiClient {
         }
 
         return onResponse(response);
-    }
-
-    login(data, onResponse) {
-        return this._requester.call({
-            endpoint: new LoginEndpoint(),
-            onResponse: (response) => this._handleResponse(response, onResponse),
-            data: data
-        });
-    }
-
-    getUsers(data, onResponse) {
-        return this._requester.call({
-            endpoint: new ListUsersEndpoint(),
-            onResponse: (response) => this._handleResponse(response, onResponse),
-            data: data
-        })
-    }
-
-    getProjects(data, onResponse, customHeaders) {
-        return this._requester.call({
-            endpoint: new ListProjectsEndpoint(),
-            onResponse: (response) => this._handleResponse(response, onResponse),
-            data: data,
-            headers: customHeaders
-        })
-    }
-
-    getProject(id, onResponse, customHeaders) {
-        console.log("consulting project with id: " + id);
-        return this._requester.call({
-            endpoint: new GetProjectEndpoint(id),
-            onResponse: (response) => this._handleResponse(response, onResponse),
-            headers: customHeaders
-        })
     }
 }
 

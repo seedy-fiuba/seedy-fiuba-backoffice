@@ -5,6 +5,7 @@ import {Login} from "../controller/Login";
 import {PrivateRoute} from "./PrivateRoute";
 import {Home} from "../controller/Home";
 import {UsersList} from "../controller/users/List";
+import UserView from "../controller/users/UserView";
 import {ProjectsList} from "../controller/projects/List";
 import ProjectView from "../controller/projects/ProjectView";
 import Nav from "../components/Navbar/Navbar";
@@ -16,6 +17,8 @@ class Routes extends Component {
     render() {
         return (
             <Router key="router">
+                <br/>
+                <br/>
                 <Row>
                     { localStorage.getItem("token") &&
                         <Col xs={2}>
@@ -31,6 +34,7 @@ class Routes extends Component {
                             <PrivateRoute exact path={app.routes().home} component={Home}/>
                             <PrivateRoute exact path={app.routes().users} component={UsersList}/>
                             <PrivateRoute exact path={app.routes().project} component={ProjectView}/>
+                            <PrivateRoute exact path={app.routes().profile} component={UserView}/>
                             <PrivateRoute exact path={app.routes().projects} component={ProjectsList}/>
                         </Switch>
                     </Col>
