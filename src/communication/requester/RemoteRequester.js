@@ -15,10 +15,10 @@ class RemoteRequester extends Requester {
         }
 
         return fetch(this._baseUrl + url, request).then(result => {
-            return result.json().then((jsonResponse => {
-                jsonResponse.status = result.status;
-                return onResponse(this._buildResponse(jsonResponse, endpoint));
-            }));
+            return result.json()
+        }).then(data => {
+            console.log(data)
+            return onResponse(this._buildResponse(data, endpoint))
         })
             /***
              * https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#Checking_that_the_fetch_was_successful
@@ -50,8 +50,8 @@ class RemoteRequester extends Requester {
 
     _buildResponse(response, endpoint) {
         let endpointResponse;
-        if (!response.status)
-            response.status = 200;
+        if (!response.statusCode)
+            response.statusCode = 200;
 
         const availableResponsesForEndpoint = endpoint.responses();
         for (let responseType of availableResponsesForEndpoint) {

@@ -4,7 +4,7 @@ class HTTPResponse {
     }
 
     httpStatusCode() {
-        return this._response.status;
+        return this._response.statusCode;
     }
 }
 
@@ -12,12 +12,12 @@ class HTTPResponse {
 export class ServerErrorResponse extends HTTPResponse {
     static defaultResponse() {
         return {
-            status: 500
+            statusCode: 500
         }
     }
 
     static understandThis(response) {
-        return response.status >= 400;
+        return response.statusCode >= 400;
     }
 
     hasError() {
