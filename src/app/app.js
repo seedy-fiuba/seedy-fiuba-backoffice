@@ -62,7 +62,8 @@ class App {
             users: '/users',
             project: '/project/:id',
             profile: '/users/:id',
-            projects: '/projects'
+            projects: '/projects',
+            registerAdmin: '/new/users'
         }
     }
 

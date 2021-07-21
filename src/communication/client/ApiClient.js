@@ -11,7 +11,7 @@ class ApiClient {
     _handleResponse(response, onResponse) {
         if (response instanceof ServerErrorResponse) {
             console.log("Server error: ", response);
-            return this._handleServerError(response);
+            // return this._handleServerError(response); // ToDo se quedaba sin hacer nada
         }
 
         return onResponse(response);

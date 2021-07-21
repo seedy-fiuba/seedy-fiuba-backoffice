@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Table, Col} from "reactstrap";
+import {Table, Col, Button} from "reactstrap";
 import {Visibility} from "@material-ui/icons";
 
 class UsersTable extends Component {
@@ -24,6 +24,9 @@ class UsersTable extends Component {
             )
         return (
             <Col>
+                <div style={{float: 'right'}}>
+                    <Button color="success" onClick={() => {this.props.history.push('/new/users');}}> Agregar admin </Button>{' '}
+                </div>
                 <Table hover>
                     <thead>
                     <tr>

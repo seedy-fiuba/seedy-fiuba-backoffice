@@ -20,6 +20,10 @@ export class ServerErrorResponse extends HTTPResponse {
         return response.statusCode >= 400;
     }
 
+    errorMessages() {
+        return this._response.message;
+    }
+
     hasError() {
         return true;
     }

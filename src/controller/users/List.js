@@ -23,6 +23,8 @@ export class UsersList extends Component {
         if (response.hasError()) {
             this.setState({ errorMessage: response.errorMessage()});
         } else {
+            console.log(response)
+            console.log(response.content())
             this.setState({users: response.content().users})
         }
     }
