@@ -1,9 +1,9 @@
-import {Endpoint} from "./Endpoint.js";
-import {SuccessfulApiResponse} from "../responses/generalResponses/SuccessfulApiResponse";
-import {ServerErrorResponse} from "../responses/generalResponses/ServerErrorResponse";
+import {Endpoint} from "../Endpoint.js";
+import {SuccessfulApiResponse} from "../../responses/generalResponses/SuccessfulApiResponse";
+import {ServerErrorResponse} from "../../responses/generalResponses/ServerErrorResponse";
 
 
-export class GetProjectEndpoint extends Endpoint {
+export class UpdateProjectEndpoint extends Endpoint {
     constructor(id) {
         super();
 
@@ -19,7 +19,7 @@ export class GetProjectEndpoint extends Endpoint {
     }
 
     method() {
-        return 'GET'
+        return 'PUT'
     }
 
     needsAuthorization() {

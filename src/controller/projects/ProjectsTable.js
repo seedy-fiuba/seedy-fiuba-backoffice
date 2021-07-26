@@ -10,8 +10,8 @@ class ProjectsTable extends Component {
     }
 
     renderProject(project) {
-        console.log("On click project: " + project._id);
-        this.props.history.push('/project/' + project._id);
+        console.log("On click project: " + project.id);
+        this.props.history.push('/project/' + project.id);
     }
 
     render() {
@@ -36,7 +36,7 @@ class ProjectsTable extends Component {
                 {
                     this.props.projects.map((project) => {
                         return <tr>
-                            <th scope="row">{project._id}</th>
+                            <th scope="row">{project.id}</th>
                             <td>{project.title}</td>
                             <td>{project.description}</td>
                             <td>{project.category}</td>

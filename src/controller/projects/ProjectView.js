@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Col, Form, FormGroup, Row, Input, Label, Card, CardBody, CardHeader} from 'reactstrap';
+import {Col, Form, FormGroup, Row, Input, Label, Card, CardBody, CardHeader, Button} from 'reactstrap';
 import {app} from "../../app/app";
 import Box from '@material-ui/core/Box';
 class ProjectView extends Component {
@@ -21,6 +21,7 @@ class ProjectView extends Component {
 
         this.fetchProject = this.fetchProject.bind(this);
         this.handleApiResponse = this.handleApiResponse.bind(this);
+        this.blockProject = this.blockProject.bind(this);
     }
 
     handleApiResponse(response) {
@@ -34,6 +35,11 @@ class ProjectView extends Component {
 
     fetchProject() {
         app.projectsApiClient().getProject(this.props.match.params.id, this.handleApiResponse, {'X-Override-Token': true})
+    }
+
+    blockProject() {
+        let newStatus = this.state.project.isBlocked == true ? "unblocked" : "blocked"
+        app.projectsApiClient().updateProject(this.state.project.id, newStatus, this.handleApiResponse)
     }
 
     componentDidMount() {
@@ -55,15 +61,15 @@ class ProjectView extends Component {
                     <Col xs={8}>
                         <Card>
                             <CardHeader>
-                                <b>#ID: {this.state.project._id}</b>
+                                <b>#ID: {this.state.project.id}</b>
                             </CardHeader>
                             <CardBody>
                                 <Form>
                                 <FormGroup row>
-                                        <Label for="_id" sm={3}> ID</Label>
+                                        <Label for="id" sm={3}> ID</Label>
                                         <Col sm={9}>
-                                            <Input type="_id" name="_id" id="_id" disabled
-                                                   defaultValue={this.state.project._id}/>
+                                            <Input type="id" name="id" id="id" disabled
+                                                   defaultValue={this.state.project.id}/>
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
@@ -84,7 +90,7 @@ class ProjectView extends Component {
                                         <Label for="status" sm={3}>Status</Label>
                                         <Col sm={9}>
                                             <Input type="status" name="status" id="status" disabled
-                                                   defaultValue={this.state.project.status}/>
+                                                   Value={this.state.project.isBlocked ? 'blocked': this.state.project.status}/>
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
@@ -109,6 +115,13 @@ class ProjectView extends Component {
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
+                                        <Label for="walletId" sm={3}>Wallet ID</Label>
+                                        <Col sm={9}>
+                                            <Input type="walletId" name="walletId" id="walletId" disabled
+                                                   defaultValue={this.state.project.walletId}/>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
                                         <Label for="finishDate" sm={3}>Finish Date</Label>
                                         <Col sm={9}>
                                             <Input type="finishDate" name="finishDate" id="finishDate" disabled
@@ -120,6 +133,13 @@ class ProjectView extends Component {
                                         <Col sm={9}>
                                             <Input type="fundedAmount" name="fundedAmount" id="fundedAmount" disabled
                                                    defaultValue={this.state.project.fundedAmount}/>
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="currentStageID" sm={3}>Current stage ID</Label>
+                                        <Col sm={9}>
+                                            <Input type="currentStageID" name="currentStageID" id="currentStageID" disabled
+                                                   defaultValue={this.state.project.currentStageId}/>
                                         </Col>
                                     </FormGroup>
                                     {
@@ -137,10 +157,10 @@ class ProjectView extends Component {
                                                             </Col>
                                                         </FormGroup>
                                                         <FormGroup row>
-                                                            <Label for={stageId} sm={3}>{`Status`}</Label>
+                                                            <Label for={stageId} sm={3}>{`ID`}</Label>
                                                             <Col sm={9}> 
                                                                 <Input type="text" name={stageId} id={stageId} disabled
-                                                                    defaultValue={stage.status} className="Status"/>
+                                                                    defaultValue={stage.id} className="ID"/>
                                                             </Col>
                                                         </FormGroup>
                                                         <FormGroup row>
@@ -192,6 +212,7 @@ class ProjectView extends Component {
                                     </FormGroup>
                                 </Form>
                             </CardBody>
+                            <Button color={this.state.project.isBlocked == true ? "success" : "danger" } onClick={this.blockProject}> {this.state.project.isBlocked == true ? "Unblock" : "Block" } </Button>{' '}
                         </Card>
                     </Col>
                 </Row>

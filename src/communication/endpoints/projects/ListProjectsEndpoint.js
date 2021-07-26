@@ -1,6 +1,6 @@
-import {Endpoint} from "./Endpoint.js";
-import {SuccessfulApiResponse} from "../responses/generalResponses/SuccessfulApiResponse";
-import {ServerErrorResponse} from "../responses/generalResponses/ServerErrorResponse";
+import {Endpoint} from "../Endpoint.js";
+import {SuccessfulApiResponse} from "../../responses/generalResponses/SuccessfulApiResponse";
+import {ServerErrorResponse} from "../../responses/generalResponses/ServerErrorResponse";
 
 export class ListProjectsEndpoint extends Endpoint {
     static url() {

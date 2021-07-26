@@ -1,7 +1,8 @@
 import ApiClient from "./ApiClient";
 import {LoginEndpoint} from "../endpoints/users/LoginEndpoint";
-import {ListProjectsEndpoint} from "../endpoints/ListProjectsEndpoint";
-import {GetProjectEndpoint} from "../endpoints/GetProjectEndpoint";
+import {ListProjectsEndpoint} from "../endpoints/projects/ListProjectsEndpoint";
+import {GetProjectEndpoint} from "../endpoints/projects/GetProjectEndpoint";
+import {UpdateProjectEndpoint} from "../endpoints/projects/UpdateProjectEndpoint";
 
 class ProjectsApiClient extends ApiClient {
     getProjects(data, onResponse, customHeaders) {
@@ -19,6 +20,21 @@ class ProjectsApiClient extends ApiClient {
             endpoint: new GetProjectEndpoint(id),
             onResponse: (response) => this._handleResponse(response, onResponse),
             headers: customHeaders
+        })
+    }
+
+    updateProject(id, newStatus, onResponse) {
+        console.log("attempting to update project with id: " + id);
+        return this._requester.call({
+            endpoint: new UpdateProjectEndpoint(id),
+            onResponse: (response) => this._handleResponse(response, onResponse),
+            data: {
+                status: newStatus
+            },
+            headers: {
+                "X-Admin": "true",
+                'X-Override-Token': "true"
+            }
         })
     }
 }
