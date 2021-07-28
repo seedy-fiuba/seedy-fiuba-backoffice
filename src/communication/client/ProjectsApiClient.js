@@ -1,5 +1,4 @@
 import ApiClient from "./ApiClient";
-import {LoginEndpoint} from "../endpoints/users/LoginEndpoint";
 import {ListProjectsEndpoint} from "../endpoints/projects/ListProjectsEndpoint";
 import {GetProjectEndpoint} from "../endpoints/projects/GetProjectEndpoint";
 import {UpdateProjectEndpoint} from "../endpoints/projects/UpdateProjectEndpoint";

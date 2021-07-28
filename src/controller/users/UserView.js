@@ -7,7 +7,7 @@ class UserView extends Component {
         super(props);
 
         this.state = {
-            loading: false,
+            loading: true,
             user: {},
             errorMessage: ''
         }

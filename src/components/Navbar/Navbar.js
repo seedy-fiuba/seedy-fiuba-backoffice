@@ -22,6 +22,9 @@ class Navbar extends Component {
                             <NavItem>
                                 <NavLink href="/projects">Projects</NavLink>
                             </NavItem>
+                            <NavItem>
+                                <NavLink href="/servers">Servers</NavLink>
+                            </NavItem>
                         </Nav>
                     </Col>
                 </Row>

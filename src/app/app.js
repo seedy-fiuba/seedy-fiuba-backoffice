@@ -1,6 +1,7 @@
 import ApiClient from "../communication/client/ApiClient";
 import UsersApiClient from "../communication/client/UsersApiClient";
 import ProjectsApiClient from "../communication/client/ProjectsApiClient";
+import MiddleApiClient from "../communication/client/MiddleApiClient";
 import FakeRequester from "../communication/requester/FakeRequester";
 import RemoteRequester from "../communication/requester/RemoteRequester";
 import {getSetting} from "../settings";
@@ -28,6 +29,14 @@ class App {
         return this._projectsApiClient;
     }
 
+    middleApiClient() {
+        if (this._middleApiClient === undefined) {
+            this._middleApiClient = this._setUpMiddleApiClient();
+        }
+
+        return this._middleApiClient;
+    }
+
     _setUpApiClient(api) {
         const requester = this._setUpRequester(api);
         return new ApiClient(requester);
@@ -41,6 +50,11 @@ class App {
     _setUpUsersApiClient() {
         const requester = this._setUpRequester("USERS");
         return new UsersApiClient(requester);
+    }
+
+    _setUpMiddleApiClient() {
+        const requester = this._setUpRequester("MIDDLE");
+        return new MiddleApiClient(requester)
     }
 
     _setUpRequester(api) {
@@ -63,7 +77,9 @@ class App {
             project: '/project/:id',
             profile: '/users/:id',
             projects: '/projects',
-            registerAdmin: '/new/users'
+            registerAdmin: '/new/users',
+            servers: '/servers',
+            server: '/servers/:id'
         }
     }
 
@@ -71,8 +87,12 @@ class App {
         localStorage.setItem("token", token);
     }
 
+    getToken() {
+        return localStorage.getItem("token")
+    }
+
     thereIsLoggedInUser() {
-        return localStorage.getItem("token");
+        return this.getToken();
     }
 }
 

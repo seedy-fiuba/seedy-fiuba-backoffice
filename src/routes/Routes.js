@@ -11,6 +11,8 @@ import {ProjectsList} from "../controller/projects/List";
 import ProjectView from "../controller/projects/ProjectView";
 import Nav from "../components/Navbar/Navbar";
 import {Col, Row} from "reactstrap";
+import ServersList from "../controller/servers/List";
+import ServerView from "../controller/servers/ServerView";
 
 
 class Routes extends Component {
@@ -38,6 +40,8 @@ class Routes extends Component {
                             <PrivateRoute exact path={app.routes().profile} component={UserView}/>
                             <PrivateRoute exact path={app.routes().projects} component={ProjectsList}/>
                             <PrivateRoute exact path={app.routes().registerAdmin} component={UserRegister}/>
+                            <PrivateRoute exact path={app.routes().servers} component={ServersList}/>
+                            <PrivateRoute exact path={app.routes().server} component={ServerView}/>
                         </Switch>
                     </Col>
                 </Row>
