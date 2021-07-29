@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Redirect, Switch} from "react-router-dom
 import {app} from "../app/app";
 import {Login} from "../controller/Login";
 import {PrivateRoute} from "./PrivateRoute";
-import {Home} from "../controller/Home";
+import Home from "../controller/Home";
 import {UsersList} from "../controller/users/List";
 import UserView from "../controller/users/UserView";
 import UserRegister  from "../controller/users/UserRegister";
