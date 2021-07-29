@@ -21,7 +21,7 @@ export class ServerErrorResponse extends HTTPResponse {
     }
 
     errorMessages() {
-        return this._response.message;
+        return JSON.stringify(this._response);
     }
 
     hasError() {

@@ -37,6 +37,7 @@ export class Login extends Component {
         } else {
             console.log(response.content())
             app.loginUser(response.content().token);
+            this.props.login();
             this.props.history.push(app.routes().login);
         }
     }

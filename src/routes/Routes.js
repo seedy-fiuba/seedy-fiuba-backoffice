@@ -11,9 +11,24 @@ import {ProjectsList} from "../controller/projects/List";
 import ProjectView from "../controller/projects/ProjectView";
 import Nav from "../components/Navbar/Navbar";
 import {Col, Row} from "reactstrap";
+import ServersList from "../controller/servers/List";
+import ServerView from "../controller/servers/ServerView";
 
 
 class Routes extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isAuthenticated: false
+        }
+
+        this.login = this.login.bind(this);
+    }
+
+    login() {
+        this.setState({ isAuthenticated: true })
+    }
 
     render() {
         return (
@@ -21,16 +36,16 @@ class Routes extends Component {
                 <br/>
                 <br/>
                 <Row>
-                    { localStorage.getItem("token") &&
+                    { (this.state.isAuthenticated || app.thereIsLoggedInUser()) &&
                         <Col xs={2}>
                             <Nav/>
                         </Col>
                     }
-                    <Col xs={localStorage.getItem("token") ? 10 : 12}>
+                    <Col xs={(this.state.isAuthenticated || app.thereIsLoggedInUser()) ? 10 : 12}>
                         <Switch>
-                            <Route exact path={app.routes().login} render={props => localStorage.getItem("token") ?
+                            <Route exact path={app.routes().login} render={props => (this.state.isAuthenticated || app.thereIsLoggedInUser()) ?
                                 <Redirect to={{pathname: app.routes().home}}/> :
-                                <Login {...props}/>
+                                <Login {...props} login={this.login}/>
                             }/>
                             <PrivateRoute exact path={app.routes().home} component={Home}/>
                             <PrivateRoute exact path={app.routes().users} component={UsersList}/>
@@ -38,6 +53,8 @@ class Routes extends Component {
                             <PrivateRoute exact path={app.routes().profile} component={UserView}/>
                             <PrivateRoute exact path={app.routes().projects} component={ProjectsList}/>
                             <PrivateRoute exact path={app.routes().registerAdmin} component={UserRegister}/>
+                            <PrivateRoute exact path={app.routes().servers} component={ServersList}/>
+                            <PrivateRoute exact path={app.routes().server} component={ServerView}/>
                         </Switch>
                     </Col>
                 </Row>

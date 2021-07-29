@@ -4,28 +4,31 @@ import {Col, Nav, NavItem, NavLink, Row} from 'reactstrap';
 class Navbar extends Component {
     render() {
         return (
-            <div className="text-center">
+            <Col className="text-center" xs={12}>
                 <Row>
                     <Col xs={12}>
-                        <p>Seedy Fiuba</p>
+                        <p><b>Seedy Fiuba</b></p>
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12}>
-                        <Nav vertical>
+                        <Nav vertical pills>
                             <NavItem>
-                                <NavLink href="/">Home</NavLink>
+                                <NavLink href="/" active={window.location.pathname === '/' || window.location.pathname === '/home'}>Home</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/users">Users</NavLink>
+                                <NavLink href="/users" active={window.location.pathname === '/users'}>Users</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/projects">Projects</NavLink>
+                                <NavLink href="/projects" active={window.location.pathname === '/projects'}>Projects</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/servers" active={window.location.pathname === '/servers'}>Servers</NavLink>
                             </NavItem>
                         </Nav>
                     </Col>
                 </Row>
-            </div>
+            </Col>
         )
     }
 };
