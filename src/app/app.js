@@ -92,7 +92,7 @@ class App {
     }
 
     thereIsLoggedInUser() {
-        return this.getToken();
+        return this.getToken(); //&& this.usersApiClient().authenticate(this.getToken());
     }
 }
 
