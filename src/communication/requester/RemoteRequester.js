@@ -1,7 +1,9 @@
 import {Requester} from "./Requester.js";
 import {ErrorApiResponse} from "../responses/generalResponses/ErrorApiResponse.js";
+import {app} from "../../app/app";
 
 class RemoteRequester extends Requester {
+
     constructor(url) {
         super();
         this._baseUrl = url;
@@ -17,6 +19,12 @@ class RemoteRequester extends Requester {
         return fetch(this._baseUrl + url, request).then(result => {
             return result.json().then((jsonResponse => {
                 jsonResponse.statusCode = result.status;
+
+                if (result.status === 401) {
+                    localStorage.removeItem("token");
+                    window.location.reload();
+                }
+
                 return onResponse(this._buildResponse(jsonResponse, endpoint));
             }));
         })
