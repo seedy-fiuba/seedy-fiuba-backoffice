@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Table} from "reactstrap";
+import {Table, Col} from "reactstrap";
 import {Visibility} from "@material-ui/icons";
 
 class ProjectsTable extends Component {
@@ -16,8 +16,11 @@ class ProjectsTable extends Component {
 
     render() {
         if (this.props.projects.length === 0)
-            return <div className="spinner-grow text-success" role="status">
-                    </div>
+        return (
+            <Col className="text-center">
+                <span className="spinner-grow text-success" role="status"/>
+            </Col>
+        )
         return (
             <Table hover>
                 <thead>
