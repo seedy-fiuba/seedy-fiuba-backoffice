@@ -3,12 +3,15 @@ import {BrowserRouter as Router, Route, Redirect, Switch} from "react-router-dom
 import {app} from "../app/app";
 import {Login} from "../controller/Login";
 import {PrivateRoute} from "./PrivateRoute";
-import {Home} from "../controller/Home";
+import Home from "../controller/Home";
 import {UsersList} from "../controller/users/List";
 import UserView from "../controller/users/UserView";
+import UserRegister  from "../controller/users/UserRegister";
 import {ProjectsList} from "../controller/projects/List";
+import ProjectView from "../controller/projects/ProjectView";
 import Nav from "../components/Navbar/Navbar";
 import {Col, Row} from "reactstrap";
+
 
 class Routes extends Component {
 
@@ -31,8 +34,10 @@ class Routes extends Component {
                             }/>
                             <PrivateRoute exact path={app.routes().home} component={Home}/>
                             <PrivateRoute exact path={app.routes().users} component={UsersList}/>
+                            <PrivateRoute exact path={app.routes().project} component={ProjectView}/>
                             <PrivateRoute exact path={app.routes().profile} component={UserView}/>
                             <PrivateRoute exact path={app.routes().projects} component={ProjectsList}/>
+                            <PrivateRoute exact path={app.routes().registerAdmin} component={UserRegister}/>
                         </Switch>
                     </Col>
                 </Row>

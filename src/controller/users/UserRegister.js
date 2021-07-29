@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
-import {Form, Button, FormGroup, Label, Input, Col, Row, Alert, FormFeedback} from 'reactstrap';
-import "../assets/css/Login.css";
-import logo from "../assets/img/logo-seedyfiuba.png";
-import '../assets/css/App.css';
-import {app} from '../app/app';
+import {Col, Form, FormGroup, Row, Input, Label, Card, CardBody, FormFeedback, Button, Alert} from 'reactstrap';
+import {app} from "../../app/app";
 
-export class Login extends Component {
+class UserRegister extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             isLoading: false,
             formData: {
+                name: '',
+                lastName: '',
                 email: '',
-                password: ''
+                password: '',
+                role: "admin"
             },
             errorMessage: ''
         };
@@ -34,33 +34,39 @@ export class Login extends Component {
         this.setState({isLoading: false});
         if (response.hasError()) {
             this.setState({errorMessage: response.errorMessages()});
+            this.setState({isLoading: false});
         } else {
             console.log(response.content())
-            app.loginUser(response.content().token);
-            this.props.history.push(app.routes().login);
+            // Estaria copado emitir una alerta de que salio todo bien
+            this.props.history.push('/users');
         }
     }
 
     handleSubmit() {
         this.setState({isLoading: true});
-        app.usersApiClient().login(this.state.formData, this.handleApiResponse);
+        console.log(this.state.formData)
+        app.usersApiClient().register(this.state.formData, this.handleApiResponse);
     }
 
     render() {
         return (
-            <div className="container">
-                <Col xs="5" className="align-content-center">
-                    <Row>
-                        <Col className="text-center">
-                            <img src={logo} className="App-logo" alt="logo" />
-                            <h3>
-                                Admin
-                            </h3>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
+            <Row>
+                <Col xs={8}>
+                    <Card>
+                        <CardBody>
                             <Form>
+                                <FormGroup row>
+                                    <Label for="name" sm={2}>Name</Label>
+                                    <Col sm={10}>
+                                        <Input type="name" name="name" id="name" placeholder="name" required onChange={this.handleInputChange}/>
+                                    </Col>
+                                </FormGroup>
+                                <FormGroup row>
+                                    <Label for="lastName" sm={2}> LastName</Label>
+                                    <Col sm={10}>
+                                        <Input type="lastName" name="lastName" id="lastName" placeholder="lastName" required onChange={this.handleInputChange}/>
+                                    </Col>
+                                </FormGroup>
                                 <FormGroup row>
                                     <Label for="email" sm={2}>Email</Label>
                                     <Col sm={10}>
@@ -76,12 +82,10 @@ export class Login extends Component {
                                 </FormGroup>
                                 <Row>
                                     <Col sm={{size: 5, offset: 9}}>
-                                        <Button color="primary" onClick={this.handleSubmit} disabled={this.state.isLoading}>
-                                            {this.state.isLoading ?
+                                        <Button color="success" onClick={this.handleSubmit}> {this.state.isLoading ?
                                                 <span className="spinner-grow spinner-grow-sm" role="status"
                                                        aria-hidden="true"/>
-                                                : 'Sign In'}
-                                        </Button>
+                                                : 'Submit'} </Button>{' '}
                                     </Col>
                                 </Row>
                                 <br/>
@@ -96,12 +100,12 @@ export class Login extends Component {
                                 }
                                 </Row>
                             </Form>
-                        </Col>
-                    </Row>
+                        </CardBody>
+                    </Card>
                 </Col>
-            </div>
+            </Row>
         )
     }
 }
 
-export default Login;
+export default UserRegister;

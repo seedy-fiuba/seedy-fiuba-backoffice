@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Col, Form, FormGroup, Row, Input, Label, Card, CardBody, CardHeader} from 'reactstrap';
+import {Col, Form, FormGroup, Row, Input, Label, Card, CardBody, CardHeader, Button} from 'reactstrap';
 import {app} from "../../app/app";
 
 class UserView extends Component {
@@ -93,8 +93,19 @@ class UserView extends Component {
                                                    defaultValue={this.state.user.updatedAt}/>
                                         </Col>
                                     </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="status" sm={3}> Status </Label>
+                                        <Col sm={9}>
+                                            <Input type="updated_at" name="status" id="status" disabled
+                                                   Value={this.state.user.status}/>
+                                        </Col>
+                                    </FormGroup>
                                 </Form>
                             </CardBody>
+                            <Button color={this.state.user.status == 'blocked' ? "success" : "danger" } onClick={() => {
+                                let newStatus = this.state.user.status == 'blocked' ? "available" : "blocked"
+                                app.usersApiClient().updateUser(this.state.user.id, newStatus , this.handleApiResponse)
+                            }}> {this.state.user.status == 'blocked' ? "Unblock" : "Block" } </Button>{' '}
                         </Card>
                     </Col>
                 </Row>

@@ -8,6 +8,6 @@ export class InvalidCredentials extends ErrorApiResponse {
     }
 
     static understandThis(response) {
-        return response.status === 401;
+        return response.statusCode === 401;
     }
 }

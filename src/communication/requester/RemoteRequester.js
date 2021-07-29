@@ -7,8 +7,8 @@ class RemoteRequester extends Requester {
         this._baseUrl = url;
     }
 
-    call({endpoint, onResponse, data = undefined}) {
-        const request = this._buildRequest(endpoint, data);
+    call({endpoint, onResponse, data = undefined, headers = undefined}) {
+        const request = this._buildRequest(endpoint, data, headers);
         let url = endpoint.url();
         if (endpoint.method() === 'GET' && data) {
             url += "?" + this._dataToQueryString(data);
@@ -16,7 +16,7 @@ class RemoteRequester extends Requester {
 
         return fetch(this._baseUrl + url, request).then(result => {
             return result.json().then((jsonResponse => {
-                jsonResponse.status = result.status;
+                jsonResponse.statusCode = result.status;
                 return onResponse(this._buildResponse(jsonResponse, endpoint));
             }));
         })
@@ -33,8 +33,8 @@ class RemoteRequester extends Requester {
         })
     }
 
-    _buildRequest(endpoint, data) {
-        let headers = this._buildHeadersFor(endpoint);
+    _buildRequest(endpoint, data, customHeaders) {
+        let headers = this._buildHeadersFor(endpoint, customHeaders);
         let requestOptions = {
             method: endpoint.method(),
             headers: headers
@@ -50,9 +50,7 @@ class RemoteRequester extends Requester {
 
     _buildResponse(response, endpoint) {
         let endpointResponse;
-        if (!response.status)
-            response.status = 200;
-
+        
         const availableResponsesForEndpoint = endpoint.responses();
         for (let responseType of availableResponsesForEndpoint) {
             if (responseType.understandThis(response)) {
@@ -66,8 +64,11 @@ class RemoteRequester extends Requester {
         return endpointResponse;
     }
 
-    _buildHeadersFor(endpoint) {
-        let headers = {};
+    _buildHeadersFor(endpoint, headers) {
+        if (headers == undefined) {
+            headers = {};
+        }
+        
         if (endpoint.contentType() && endpoint.contentType() !== "multipart/form-data") {
             headers['Content-Type'] = endpoint.contentType();
         }

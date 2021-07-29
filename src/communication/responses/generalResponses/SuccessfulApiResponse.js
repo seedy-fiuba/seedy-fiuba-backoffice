@@ -6,6 +6,6 @@ export class SuccessfulApiResponse extends Response {
     }
 
     static understandThis(response) {
-        return (response.status <= 300 && response.status >= 200);
+        return (response.statusCode <= 300 && response.statusCode >= 200);
     }
 }
